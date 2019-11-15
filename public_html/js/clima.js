@@ -22,10 +22,21 @@ function getClima(){
             $('#pressao').html(data.main.pressure+"hPa ");
             
             $('#velocidade').html(data.wind.speed+"km/h ");
+           
             
-            $('#nascer').html(data.sys.sunrise);
+            var dataAmanhecer= new Date(data.sys.sunrise*1000);
+            var descDataAmanhecer=
+                    dataAmanhecer.getHours()+':'+dataAmanhecer.getMinutes();
+            $('#nascer').html(descDataAmanhecer);
             
-            $('#por').html(data.sys.sunset);
+            var dataPorDoSol= new Date (data.sys.sunset*1000);
+            var descDataPorDoSol = dataPorDoSol.getHours()+':'+dataPorDoSol.getMinutes();
+            $('#por').html(descDataPorDoSol);
+            
+            var icone = data.weather[0].icon;
+            var caminhoIcone = 'img/icone/'+icone+'.png';
+            $('#icone').attr('src', caminhoIcone);
+            
         },
         error: function (argument) {
             alert('Falha ao obter dados!');
